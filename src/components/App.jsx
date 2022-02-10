@@ -1,17 +1,15 @@
 //Imports
 import React, { Component } from 'react';
 import './App.css';
-// import axios from 'axios';
-import {
-    BrowserRouter, 
-    Routes, 
-    Route, 
-    Link
-} from "react-router-dom"
-
+import axios from 'axios';
 import Login from "./Login/Login.jsx"
 import Register from "./Register/Register.jsx"
-
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Link
+} from "react-router-dom"
 
 //Import components
 
@@ -20,9 +18,30 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-
+            registerInfo: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: ''
+            }
         }
     }
+
+    handleRegisterChange = (event) => {
+        this.setState(prevState => ({
+            registerInfo: {
+                ...prevState.registerInfo,
+                [event.target.name]: event.target.value
+            }
+        })
+        )
+    }
+
+    handleSubmitRegister = (event) => {
+        event.preventDefault();
+
+    }
+
 
     //Run on component initial mount
     componentDidMount() {
@@ -31,11 +50,8 @@ class App extends Component {
 
     //Render components
     render() {
-        return(
+        return (
             <BrowserRouter>
-                {/* <div>
-                    Hello
-                </div> */}
                 <div>
                     <nav>
                         <ul>
@@ -57,7 +73,7 @@ class App extends Component {
                     <Routes>
                         <Route exact path="/about" element={<About />} />
                         <Route exact path="/create" element={<Create />} />
-                        <Route exact path="/register" element={<Register />} />
+                        <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} />} />
                         <Route exact path="/" element={<Login />} />
                     </Routes>
                 </div>
