@@ -10,6 +10,7 @@ import {
 } from "react-router-dom"
 
 import Login from "./Login/Login.jsx"
+import Register from "./Register/Register.jsx"
 
 
 //Import components
@@ -42,6 +43,9 @@ class App extends Component {
                                 <Link to="/">Home</Link>
                             </li>
                             <li>
+                                <Link to="/register">Register</Link>
+                            </li>
+                            <li>
                                 <Link to="/about">About Me</Link>
                             </li>
                             <li>
@@ -53,6 +57,7 @@ class App extends Component {
                     <Routes>
                         <Route exact path="/about" element={<About />} />
                         <Route exact path="/create" element={<Create />} />
+                        <Route exact path="/register" element={<Register />} />
                         <Route exact path="/" element={<Login />} />
                     </Routes>
                 </div>
