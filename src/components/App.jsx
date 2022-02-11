@@ -37,11 +37,20 @@ class App extends Component {
         )
     }
 
-    handleSubmitRegister = (event) => {
+    handleRegisterSubmit = (event) => {
         event.preventDefault();
 
+        this.postRegister(this.state.registerInfo)
     }
 
+    //HTTP Requests
+    postRegister = async (info) => {
+        await axios
+            .post('http://localhost:5003/api/users/register', info)
+            .then((res) => {
+
+            });
+    }
 
     //Run on component initial mount
     componentDidMount() {
@@ -73,7 +82,7 @@ class App extends Component {
                     <Routes>
                         <Route exact path="/about" element={<About />} />
                         <Route exact path="/create" element={<Create />} />
-                        <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} />} />
+                        <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
                         <Route exact path="/" element={<Login />} />
                     </Routes>
                 </div>

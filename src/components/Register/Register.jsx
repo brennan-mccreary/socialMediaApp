@@ -4,7 +4,7 @@ const Register = (props) => {
     return (
         <div>
             <h2>Register My Ameezement</h2>
-            <form>
+            <form className="register-user" onSubmit={props.handleSubmit}>
                 <div className="input-group mb-3" >
                     <span className="input-group-text" id="basic-addon3">First Name: </span>
                     <input name='firstName' value={props.info.firstName} onChange={props.handleChange} type="text" className="form-control" aria-label="First Name" aria-describedby="basic-addon1" />
@@ -24,8 +24,9 @@ const Register = (props) => {
                     <span className="input-group-text" id="basic-addon6">Password: </span>
                     <input name='password' value={props.info.password} onChange={props.handleChange} type="text" className="form-control" aria-label="New Password" aria-describedby="basic-addon1" />
                 </div>
-
-                <button type="button" className="btn btn-primary">Submit</button>
+                <div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     );
