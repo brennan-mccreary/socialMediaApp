@@ -2,14 +2,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Login from "./Login/Login.jsx"
-import Register from "./Register/Register.jsx"
+import Login from "./Login/Login.jsx";
+import Home from './Home/Home';
+import About from './About Me/About';
+import Register from "./Register/Register.jsx";
 import jwtDecode from 'jwt-decode';
 import {
     BrowserRouter,
     Routes,
     Route,
-    Link
+    Link,
+    
 } from "react-router-dom"
 
 //Import components
@@ -109,13 +112,14 @@ class App extends Component {
                 <div>
                     <nav>
                         <ul>
-                            <li>
-                                <Link to="/">Home</Link>
+                        <li>
+                                <Link to="/">Login</Link>
                             </li>
                             <li>
-                                <Link to="/register">Register</Link>
+                                <Link to="/home">Home</Link>
                             </li>
                             <li>
+                                {/* {(this.email.length > 0 ) ? <Link to="/about">About Me</Link> : null} */}
                                 <Link to="/about">About Me</Link>
                             </li>
                             <li>
@@ -127,11 +131,16 @@ class App extends Component {
                     <Routes>
                         <Route exact path="/about" element={<About />} />
                         <Route exact path="/create" element={<Create />} />
-                        {/* <Route exact path="/login" element={<Login handleChange={this.handleRegisterChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} /> */}
+                        <Route exact path="/home" element={<Home />} />
                         <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
-                        <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
+                        <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} >
+                            {/* {this.state.currentUser ? <Redirect to="/home" /> : null} */}
+
+                        </Route>
+                        {/* <Route exact path="/*" element={<Home/>} /> */}
                     </Routes>
                 </div>
+
             </BrowserRouter>
 
         )
@@ -139,9 +148,7 @@ class App extends Component {
 }
 
 
-function About() {
-    return <h2>About to get Funky</h2>;
-}
+
 
 function Create() {
     return <h2>Nooice</h2>;
