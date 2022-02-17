@@ -3,7 +3,7 @@ import React from "react";
 const Register = (props) => {
     return (
         <div>
-            <h2>Register My Ameezement</h2>
+            <h2>Enter Your Information to Create an Account</h2>
             <form className="register-user" onSubmit={props.handleSubmit}>
                 <div className="input-group mb-3" >
                     <span className="input-group-text" id="basic-addon3">First Name: </span>
@@ -25,7 +25,7 @@ const Register = (props) => {
                     <input name='password' value={props.info.password} onChange={props.handleChange} type="text" className="form-control" aria-label="New Password" aria-describedby="basic-addon1" />
                 </div>
                 <div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Create</button>
                 </div>
             </form>
         </div>

@@ -5,12 +5,18 @@ import axios from 'axios';
 import Login from "./Login/Login.jsx"
 import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
+import Login from "./Login/Login.jsx";
+import Home from './Home/Home';
+import About from './About Me/About';
+import Register from "./Register/Register.jsx";
+import UploadImage from './UploadImage/UploadImage';
 import jwtDecode from 'jwt-decode';
 import {
     BrowserRouter,
     Routes,
     Route,
-    Link
+    Link,
+
 } from "react-router-dom"
 
 //Import components
@@ -29,9 +35,21 @@ class App extends Component {
                 password: ''
             },
             currentUser: {
-
-            }
+                _id: "620b08c552877c05ecd3e8e4"
+            },
+            file: ''
         }
+    }
+
+    setFile = (file) => {
+        this.setState({
+            file: file
+        });
+    }
+
+    handleUploadImageSubmit = (event) => {
+        event.preventDefault();
+        this.putImage(this.state.currentUser._id);
     }
 
     handleRegisterChange = (event) => {
@@ -65,6 +83,18 @@ class App extends Component {
     }
 
     //HTTP Requests
+    putImage = async (id) => {
+        var form = new FormData();
+        form.append('image', this.state.file);
+
+        await axios
+            .put(`http://localhost:5003/api/users/image/${id}`, form)
+            .then((res) => {
+                const user = res.data;
+                console.log(user);
+            });
+    };
+
     postRegister = async (info) => {
         await axios
             .post('http://localhost:5003/api/users/register', info)
@@ -114,12 +144,13 @@ class App extends Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/">Login</Link>
                             </li>
                             <li>
-                                <Link to="/register">Register</Link>
+                                <Link to="/home">Home</Link>
                             </li>
                             <li>
+                                {/* {(this.email.length > 0 ) ? <Link to="/about">About Me</Link> : null} */}
                                 <Link to="/about">About Me</Link>
                             </li>
                             <li>
@@ -128,18 +159,24 @@ class App extends Component {
                             <li>
                                 <Link to="/logout">Logout</Link>
                             </li>
+                            {/* test links */}
+                            <li>
+                                <Link to="/upload">Upload Image</Link>
+                            </li>
                         </ul>
                     </nav>
 
                     <Routes>
                         <Route exact path="/about" element={<About />} />
                         <Route exact path="/create" element={<Create />} />
-                        {/* <Route exact path="/login" element={<Login handleChange={this.handleRegisterChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} /> */}
+                        <Route exact path="/home" element={<Home />} />
                         <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
                         <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
                         <Route exact path="/logout" element={<Logout handleLogout={this.handleLogout} />} />
+                        <Route path="/upload" element={<UploadImage file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
                     </Routes>
                 </div>
+
             </BrowserRouter>
 
         )
@@ -147,9 +184,7 @@ class App extends Component {
 }
 
 
-function About() {
-    return <h2>About to get Funky</h2>;
-}
+
 
 function Create() {
     return <h2>Nooice</h2>;
