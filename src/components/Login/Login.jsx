@@ -1,16 +1,25 @@
 import React from "react";
 import {
-    Link,
+    useNavigate,
+    Link
 } from "react-router-dom"
 
 
 const Login = (props) => {
-    // let navigate = useNavigate();
+    let navigate = useNavigate();
+    const loggingIn = (event) => {
+        // console.log(event);
+        // event.preventDefault()
+        props.handleSubmit(event);
+        navigate('/home')
+        
+    }
+
     return (
 
         <div>
             <h2>Welcome Back, Friend!</h2>
-            <form className="login" onSubmit={props.handleSubmit}>
+            <form className="login" onSubmit={loggingIn}>
 
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">Email: </span>
@@ -22,7 +31,7 @@ const Login = (props) => {
                     <input name='password' value={props.info.password} onChange={props.handleChange} type="text" className="form-control" aria-label="Password" aria-describedby="basic-addon1" />
                 </div>
                 <div>
-                    <button type="login" className="btn btn-primary"  >Login</button>
+                    <button type="submit" className="btn btn-primary"  >Login</button>
                 </div>
             </form>
             <div>

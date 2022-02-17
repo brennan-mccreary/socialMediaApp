@@ -7,6 +7,7 @@ import Home from './Home/Home';
 import About from './About Me/About';
 import Register from "./Register/Register.jsx";
 import UploadImage from './UploadImage/UploadImage';
+import FriendsList from './FriendsList/FriendsList';
 import jwtDecode from 'jwt-decode';
 import {
     BrowserRouter,
@@ -34,7 +35,9 @@ class App extends Component {
             currentUser: {
                 _id: "620b08c552877c05ecd3e8e4"
             },
-            file: ''
+            file: '',
+            friends: [],
+            posts: []
         }
     }
 
@@ -125,6 +128,31 @@ class App extends Component {
         localStorage.clear()
     }
 
+
+    handleFriendsSubmit = (event) => {
+        event.preventDefault();
+        this.currentFriends(this.state.currentUser._id);
+    };
+
+    currentFriends = async (id) => {
+   
+        await axios
+            .get(`http://localhost:5003/api/users`, id)
+            .then((res) => {
+                this.friends = res.data;
+                // console.log(this.friends);
+            });
+    };
+
+    Posts = async () => {
+   
+        await axios
+            .get(`http://localhost:5003/api/post`)
+            .then((res) => {
+                this.profileFeed = res.data;
+            });
+    };
+
     //Run on component initial mount
     componentDidMount() {
 
@@ -150,6 +178,9 @@ class App extends Component {
                             <li>
                                 <Link to="/create">Create Post</Link>
                             </li>
+                            <li>
+                                <Link to="/friends">My Friends</Link>
+                            </li>
                             {/* test links */}
                             <li>
                                 <Link to="/upload">Upload Image</Link>
@@ -160,6 +191,7 @@ class App extends Component {
                     <Routes>
                         <Route exact path="/about" element={<About />} />
                         <Route exact path="/create" element={<Create />} />
+                        <Route exact path="/friends" element={<FriendsList friends={this.state.friends} handleSubmit={this.handleFriendsSubmit} />} />
                         <Route exact path="/home" element={<Home />} />
                         <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
                         <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
