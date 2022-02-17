@@ -9,6 +9,7 @@ import Home from '../pages/Home/Home';
 import About from '../pages/About/About';
 import NewPost from '../pages/NewPost/NewPost';
 import jwtDecode from 'jwt-decode';
+import ErrorPage from '../components/ErrorPage/ErrorPage'
 import {
     BrowserRouter,
     Routes,
@@ -186,7 +187,8 @@ class App extends Component {
                             <Route exact path="/about/*" element={<About file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
                             <Route exact path="/create/*" element={<NewPost />} />
                             <Route exact path="/home/*" element={<Home />} />
-                            <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} />                            
+                            <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
+                            <Route path='*' element={<ErrorPage/>}/>                         
                         </Routes>
                     </>
                     : 
@@ -194,15 +196,11 @@ class App extends Component {
                         <Routes>
                             <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
                             <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
+                            <Route path='*' element={<ErrorPage/>}/>  
                         </Routes>
                     </> }
-                    
-
-                    
                 </div>
-
             </BrowserRouter>
-
         )
     }
 }
