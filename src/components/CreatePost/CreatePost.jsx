@@ -1,9 +1,9 @@
 import React from 'react';
-import './Posts.css';
+// import './Posts.css';
 
 const CreatePosts = (props) => {
     return (
-        <div className='top-level' id= 'Post' hidden={true}>
+        <div className='top-level' id= 'Post' hidden={false}>
             Add a Post
             <form className='post-box' onSubmit={props.submitPost}>
                 <input type="text"  value={props.postText} onChange={props.changePost}/>

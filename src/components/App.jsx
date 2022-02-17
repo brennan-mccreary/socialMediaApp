@@ -5,10 +5,9 @@ import axios from 'axios';
 import Login from "./Login/Login.jsx"
 import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
-import Home from './Home/Home';
-import About from './About Me/About';
-import UploadImage from './UploadImage/UploadImage';
-import FriendsList from './FriendsList/FriendsList';
+import Home from '../pages/Home/Home';
+import About from '../pages/About/About';
+import CreatePage from '../pages/createPost/CreatePost';
 import jwtDecode from 'jwt-decode';
 import {
     BrowserRouter,
@@ -170,9 +169,6 @@ class App extends Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Login</Link>
-                            </li>
-                            <li>
                                 <Link to="/home">Home</Link>
                             </li>
                             <li>
@@ -183,25 +179,22 @@ class App extends Component {
                                 <Link to="/create">Create Post</Link>
                             </li>
                             <li>
-                                <Link to="/friends">My Friends</Link>
                                 <Link to="/logout">Logout</Link>
                             </li>
-                            {/* test links */}
-                            <li>
+                            {/* <li>
                                 <Link to="/upload">Upload Image</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </nav>
 
                     <Routes>
-                        <Route exact path="/about" element={<About />} />
-                        <Route exact path="/create" element={<Create />} />
-                        <Route exact path="/friends" element={<FriendsList friends={this.state.friends} handleSubmit={this.handleFriendsSubmit} />} />
-                        <Route exact path="/home" element={<Home />} />
+                        <Route exact path="/about" element={<About file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
+                        <Route exact path="/create" element={<CreatePage />} />
+                        <Route exact path="/home/*" element={<Home />} />
                         <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
-                        <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
                         <Route exact path="/logout" element={<Logout handleLogout={this.handleLogout} />} />
-                        <Route path="/upload" element={<UploadImage file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
+                        {/* <Route path="/upload" element={<UploadImage file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} /> */}
+                        <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
                     </Routes>
                 </div>
 
