@@ -2,10 +2,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Login from "./Login/Login.jsx";
+import Login from "./Login/Login.jsx"
+import Logout from "./Logout/Logout"
+import Register from "./Register/Register.jsx"
 import Home from './Home/Home';
 import About from './About Me/About';
-import Register from "./Register/Register.jsx";
 import UploadImage from './UploadImage/UploadImage';
 import FriendsList from './FriendsList/FriendsList';
 import jwtDecode from 'jwt-decode';
@@ -14,7 +15,7 @@ import {
     Routes,
     Route,
     Link,
-    
+
 } from "react-router-dom"
 
 //Import components
@@ -86,7 +87,7 @@ class App extends Component {
     putImage = async (id) => {
         var form = new FormData();
         form.append('image', this.state.file);
-   
+
         await axios
             .put(`http://localhost:5003/api/users/image/${id}`, form)
             .then((res) => {
@@ -124,8 +125,11 @@ class App extends Component {
             })
     }
 
-    logOut = async () => {
-        localStorage.clear()
+    handleLogout = async () => {
+        localStorage.clear();
+        this.setState({
+            currentUser: {}
+        })
     }
 
 
@@ -165,7 +169,7 @@ class App extends Component {
                 <div>
                     <nav>
                         <ul>
-                        <li>
+                            <li>
                                 <Link to="/">Login</Link>
                             </li>
                             <li>
@@ -180,6 +184,7 @@ class App extends Component {
                             </li>
                             <li>
                                 <Link to="/friends">My Friends</Link>
+                                <Link to="/logout">Logout</Link>
                             </li>
                             {/* test links */}
                             <li>
@@ -195,7 +200,8 @@ class App extends Component {
                         <Route exact path="/home" element={<Home />} />
                         <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
                         <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
-                        <Route path="/upload" element={<UploadImage file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} /> }/>
+                        <Route exact path="/logout" element={<Logout handleLogout={this.handleLogout} />} />
+                        <Route path="/upload" element={<UploadImage file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
                     </Routes>
                 </div>
 
