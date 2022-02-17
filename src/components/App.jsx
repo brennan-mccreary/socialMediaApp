@@ -5,10 +5,8 @@ import axios from 'axios';
 import Login from "./Login/Login.jsx"
 import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
-import Login from "./Login/Login.jsx";
 import Home from './Home/Home';
 import About from './About Me/About';
-import Register from "./Register/Register.jsx";
 import UploadImage from './UploadImage/UploadImage';
 import jwtDecode from 'jwt-decode';
 import {
