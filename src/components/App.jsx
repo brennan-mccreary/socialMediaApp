@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import Login from "./Login/Login.jsx"
+import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
 import jwtDecode from 'jwt-decode';
 import {
@@ -93,8 +94,11 @@ class App extends Component {
             })
     }
 
-    logOut = async () => {
-        localStorage.clear()
+    handleLogout = async () => {
+        localStorage.clear();
+        this.setState({
+            currentUser: {}
+        })
     }
 
     //Run on component initial mount
@@ -121,6 +125,9 @@ class App extends Component {
                             <li>
                                 <Link to="/create">Create Post</Link>
                             </li>
+                            <li>
+                                <Link to="/logout">Logout</Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -130,6 +137,7 @@ class App extends Component {
                         {/* <Route exact path="/login" element={<Login handleChange={this.handleRegisterChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} /> */}
                         <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
                         <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
+                        <Route exact path="/logout" element={<Logout handleLogout={this.handleLogout} />} />
                     </Routes>
                 </div>
             </BrowserRouter>
