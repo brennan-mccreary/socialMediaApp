@@ -8,9 +8,11 @@ const FriendsList = (props) => {
                 <h2>These are my Friends</h2>
             </div>
             <div>
-                <ul>
-                    {(props.friends.length > 0) ? props.friends.map((friend, i) => friend.firstName) : <div>incoming friends list</div>}
-                </ul>
+                    {(props.friends.length > 0) ? props.friends.map((el) => 
+                    <div>
+                        {el.firstName} {el.lastName}
+                    </div>) 
+                    : <div>incoming friends list</div>}
 
             </div>
 

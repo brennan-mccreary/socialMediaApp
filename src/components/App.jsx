@@ -225,7 +225,9 @@ class App extends Component {
         await axios
             .get(`http://localhost:5003/api/users/${id}/friends`)
             .then((res) => {
-                this.friends = res.data;
+                this.setState({
+                    friends: res.data
+                })
                 // console.log(this.friends);
             });
     };
@@ -272,6 +274,7 @@ class App extends Component {
                                 <Route exact path="/about/*"
                                     element={<About
                                         file={this.state.file}
+                                        friends={this.state.friends}
                                         setFile={this.setFile}
                                         id={this.state.currentUser._id}
                                         handleSubmit={this.handleUploadImageSubmit}
