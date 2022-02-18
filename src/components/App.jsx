@@ -92,7 +92,41 @@ class App extends Component {
         })
     }
 
+    populateData = (id) => {
+        this.getFriendsPosts(id);
+    }
+
+    handleClickLike = (event) => {
+        let id = event.target.id
+
+        this.putLike(id);
+    }
+
     //HTTP Requests
+
+    putLike = async (id) => {   
+        await axios
+            .put(`http://localhost:5003/api/posts/like/${id}`)
+            .then((res) => {
+                let target = [...this.state.posts];
+                let index = target.findIndex((el) => res.data._id === el._id);
+                target[index] = res.data;
+                this.setState({
+                    posts: target
+                });
+            })
+    };
+
+    getFriendsPosts = async (id) => {
+        await axios 
+            .get(`http://localhost:5003/api/posts/friends/${id}`)
+            .then((res) => {
+                this.setState({
+                    posts: res.data
+                });
+            })
+    };
+
     putImage = async (id) => {
         var form = new FormData();
         form.append('image', this.state.file);
@@ -130,7 +164,9 @@ class App extends Component {
                 this.setState({
                     currentUser: user
                 })
-                console.log(user);
+                
+
+                this.populateData(user._id);
             })
     }
 
@@ -244,7 +280,11 @@ class App extends Component {
                                 search={this.state.search}/> }
                             />
                             <Route exact path="/create/*" element={<CreatePost />} />
-                            <Route exact path="/home/*" element={<Home />} />
+                            <Route exact path="/home/*" 
+                            element={<Home 
+                                handleClick={this.handleClickLike}
+                                posts={this.state.posts}
+                            />} />
                             <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
                             <Route path='*' element={<ErrorPage/>}/>                         
                         </Routes>

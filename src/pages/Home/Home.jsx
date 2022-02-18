@@ -9,17 +9,13 @@ import {
 
 const Home = (props) => {
     return(
-        <div >
-            <head>
-            <link rel="stylesheet" type ="text/css" href="./Home.css" />
-
-            </head>
+        <div>
 
             <Routes>
-            <Route exact path="/" element={<FriendsList friends={props.friends} />} />
+                <Route exact path="/" element={<FriendsList friends={props.friends} />} />
             </Routes>
             <Routes>
-            <Route exact path="/" element={<PostFeed />} />
+                <Route exact path="/" element={<PostFeed posts={props.posts} handleClick={props.handleClick}/>} />
             </Routes>
 
         </div>

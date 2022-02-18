@@ -1,20 +1,36 @@
 import React from "react";
-
+import './PostFeed.css';
 
 const PostFeed = (props) => {
 
     return (
-        
         <div>
+            {!props.posts ? 
             <div>
-                <h2>What's Going on Today?</h2>
+                No posts to display...
             </div>
+            :
             <div>
-                {/* <h3>
-                    {(props.posts.length > 0) ? props.posts.map((post,i)=> <tr key={i}> <td>{post.text}</td><td>{post.ownedBy}</td>   </tr>    ):null} 
-
-                </h3> */}
+                {props.posts.map((el, i) => 
+                    <div className='card post-container' key={i}>
+                        <div className="col">
+                            <div className="card" >
+                                <div className="card-body">
+                                    <h3 className="card-title">Friend's Post</h3>
+                                    <p className="card-text">{el.text}</p>
+                                    <h6>{el.ownedBy}</h6>
+                                </div>
+                                <span>
+                                    <button onClick={props.handleClick} id={el._id}>Like</button>
+                                    <a>Likes: {el.likeCount}</a>
+                                </span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
+            }
         </div>
     )
 }
