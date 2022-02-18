@@ -7,7 +7,7 @@ import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
 import Home from '../pages/Home/Home';
 import About from '../pages/About/About';
-import NewPost from '../pages/NewPost/NewPost';
+import CreatePost from './CreatePost/CreatePost';
 import jwtDecode from 'jwt-decode';
 import ErrorPage from '../components/ErrorPage/ErrorPage'
 import {
@@ -33,10 +33,15 @@ class App extends Component {
                 email: '',
                 password: ''
             },
-            currentUser: undefined,
             file: '',
+
+            allUsers: [],
+
+            search: "",
+            currentUser: undefined,
             friends: [],
-            posts: []
+            posts: [],
+            newPost: ''
         }
     }
 
@@ -81,6 +86,12 @@ class App extends Component {
         this.postLogin(this.state.loginInfo)
     }
 
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        })
+    }
+
     //HTTP Requests
     putImage = async (id) => {
         var form = new FormData();
@@ -123,6 +134,34 @@ class App extends Component {
             })
     }
 
+    postMyPost = async () => {
+        await axios
+            .post('http://localhost:5003/api/posts/post', {
+                text: this.state.newPost,
+                ownedBy: this.state.currentUser._id
+            })
+
+            .then((res) => {
+                this.setState({
+                    newPost: ''
+                })
+
+            })
+    }
+
+    handleNewPostChange = (event) => {
+        this.setState({
+            newPost: event.target.value
+        })
+
+    }
+
+    handleNewPostSubmit = (event) => {
+        event.preventDefault();
+        this.postMyPost(this.state.newPost)
+    }
+
+
     handleLogout = async () => {
         localStorage.clear();
         this.setState({
@@ -130,6 +169,15 @@ class App extends Component {
         })
     }
 
+    findAllUsers = async () => {
+        await axios
+            .get('http://localhost:5003/api/users')
+            .then((res) => {
+                this.setState({
+                    allUsers: res.data
+                })
+            });
+    }
 
     handleFriendsSubmit = (event) => {
         event.preventDefault();
@@ -137,7 +185,7 @@ class App extends Component {
     };
 
     currentFriends = async (id) => {
-   
+
         await axios
             .get(`http://localhost:5003/api/users`, id)
             .then((res) => {
@@ -147,7 +195,7 @@ class App extends Component {
     };
 
     Posts = async () => {
-   
+
         await axios
             .get(`http://localhost:5003/api/post`)
             .then((res) => {
@@ -157,6 +205,7 @@ class App extends Component {
 
     //Run on component initial mount
     componentDidMount() {
+        this.findAllUsers()
 
     };
 
@@ -194,7 +243,7 @@ class App extends Component {
                                 allUsers={this.state.allUsers} 
                                 search={this.state.search}/> }
                             />
-                            <Route exact path="/create/*" element={<NewPost />} />
+                            <Route exact path="/create/*" element={<CreatePost />} />
                             <Route exact path="/home/*" element={<Home />} />
                             <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
                             <Route path='*' element={<ErrorPage/>}/>                         
