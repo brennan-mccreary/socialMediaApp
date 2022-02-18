@@ -6,9 +6,14 @@ import {
     Routes,
 } from "react-router-dom"
 
+
 const Home = (props) => {
     return(
-        <div>
+        <div >
+            <head>
+            <link rel="stylesheet" type ="text/css" href="./Home.css" />
+
+            </head>
 
             <Routes>
             <Route exact path="/" element={<FriendsList friends={props.friends} />} />
