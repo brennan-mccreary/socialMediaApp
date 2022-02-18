@@ -184,7 +184,16 @@ class App extends Component {
                             </ul>
                         </nav>
                         <Routes>
-                            <Route exact path="/about/*" element={<About file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
+                            <Route exact path="/about/*" 
+                            element={<About 
+                                file={this.state.file} 
+                                setFile={this.setFile} 
+                                id={this.state.currentUser._id} 
+                                handleSubmit={this.handleUploadImageSubmit} 
+                                handleChange={this.handleSearchChange} 
+                                allUsers={this.state.allUsers} 
+                                search={this.state.search}/> }
+                            />
                             <Route exact path="/create/*" element={<NewPost />} />
                             <Route exact path="/home/*" element={<Home />} />
                             <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
