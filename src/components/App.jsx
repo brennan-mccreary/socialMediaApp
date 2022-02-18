@@ -185,9 +185,8 @@ class App extends Component {
     };
 
     currentFriends = async (id) => {
-
         await axios
-            .get(`http://localhost:5003/api/users`, id)
+            .get(`http://localhost:5003/api/users/${id}/friends`)
             .then((res) => {
                 this.friends = res.data;
                 // console.log(this.friends);
@@ -214,49 +213,50 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    {this.state.currentUser !== undefined ? 
-                    <>
-                        <nav>
-                            <ul>
-                                <li>
-                                    <Link to="/home">Home</Link>
-                                </li>
-                                <li>
-                                    <Link to="/about">About Me</Link>
-                                </li>
-                                <li>
-                                    <Link to="/create">Create Post</Link>
-                                </li>
-                                <li>
-                                    <Link to="/logout">Logout</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                        <Routes>
-                            <Route exact path="/about/*" 
-                            element={<About 
-                                file={this.state.file} 
-                                setFile={this.setFile} 
-                                id={this.state.currentUser._id} 
-                                handleSubmit={this.handleUploadImageSubmit} 
-                                handleChange={this.handleSearchChange} 
-                                allUsers={this.state.allUsers} 
-                                search={this.state.search}/> }
-                            />
-                            <Route exact path="/create/*" element={<CreatePost />} />
-                            <Route exact path="/home/*" element={<Home />} />
-                            <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
-                            <Route path='*' element={<ErrorPage/>}/>                         
-                        </Routes>
-                    </>
-                    : 
-                    <>
-                        <Routes>
-                            <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
-                            <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
-                            <Route path='*' element={<ErrorPage/>}/>  
-                        </Routes>
-                    </> }
+                    {this.state.currentUser !== undefined ?
+                        <>
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <Link to="/home">Home</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/about">About Me</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/create">Create Post</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/logout">Logout</Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <Routes>
+                                <Route exact path="/about/*"
+                                    element={<About
+                                        file={this.state.file}
+                                        setFile={this.setFile}
+                                        id={this.state.currentUser._id}
+                                        handleSubmit={this.handleUploadImageSubmit}
+                                        handleChange={this.handleSearchChange}
+                                        allUsers={this.state.allUsers}
+                                        search={this.state.search}
+                                        friends={this.state.friends} />}
+                                />
+                                <Route exact path="/create/*" element={<CreatePost />} />
+                                <Route exact path="/home/*" element={<Home friends={this.state.friends} />} />
+                                <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} />
+                                <Route path='*' element={<ErrorPage />} />
+                            </Routes>
+                        </>
+                        :
+                        <>
+                            <Routes>
+                                <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
+                                <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
+                                <Route exact path="*" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
+                            </Routes>
+                        </>}
                 </div>
             </BrowserRouter>
         )
