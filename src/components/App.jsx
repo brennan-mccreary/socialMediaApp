@@ -7,6 +7,7 @@ import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
 import Home from './Home/Home';
 import About from './About Me/About';
+import FindFriends from './Register/FindFriends/FindFriends';
 import UploadImage from './UploadImage/UploadImage';
 import jwtDecode from 'jwt-decode';
 import {
@@ -35,7 +36,11 @@ class App extends Component {
             currentUser: {
                 _id: "620b08c552877c05ecd3e8e4"
             },
-            file: ''
+            file: '',
+
+            allUsers: [],
+
+            search: ""
         }
     }
 
@@ -78,6 +83,12 @@ class App extends Component {
     handleLoginSubmit = (event) => {
         event.preventDefault();
         this.postLogin(this.state.loginInfo)
+    }
+
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        })
     }
 
     //HTTP Requests
@@ -129,8 +140,19 @@ class App extends Component {
         })
     }
 
+    findAllUsers = async () => {
+        await axios
+            .get('http://localhost:5003/api/users')
+            .then((res) => {
+                this.setState({
+                    allUsers: res.data
+                })
+            });
+    }
+
     //Run on component initial mount
     componentDidMount() {
+        this.findAllUsers()
 
     };
 
@@ -161,6 +183,9 @@ class App extends Component {
                             <li>
                                 <Link to="/upload">Upload Image</Link>
                             </li>
+                            <li>
+                                <Link to="/findfriends">Find Friends</Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -172,6 +197,7 @@ class App extends Component {
                         <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
                         <Route exact path="/logout" element={<Logout handleLogout={this.handleLogout} />} />
                         <Route path="/upload" element={<UploadImage file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
+                        <Route path="/findfriends" element={<FindFriends allUsers={this.state.allUsers} search={this.state.search} handleChange={this.handleSearchChange} />} />
                     </Routes>
                 </div>
 
