@@ -5,14 +5,14 @@ const FriendsList = (props) => {
     return (
         <div>
             <div>
-                <h2>These are my Friends</h2>
+                <h2>My Friends</h2>
             </div>
             <div>
                     {(props.friends.length > 0) ? props.friends.map((el) => 
                     <div>
                         {el.firstName} {el.lastName}
                     </div>) 
-                    : <div>incoming friends list</div>}
+                    : <div>No friends to show :(</div>}
 
             </div>
 

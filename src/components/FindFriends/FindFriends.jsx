@@ -3,6 +3,9 @@ import React from 'react';
 const FindFriends = (props) => {
     return (
         <div>
+            <div>
+                <h2>Find Friends</h2>
+            </div>
             <nav className="navbar navbar-light">
                 <div className="container-fluid">
                     <form className="d-flex">

@@ -273,6 +273,7 @@ class App extends Component {
                             <Routes>
                                 <Route exact path="/about/*"
                                     element={<About
+                                        user={this.state.currentUser}
                                         file={this.state.file}
                                         friends={this.state.friends}
                                         setFile={this.setFile}
