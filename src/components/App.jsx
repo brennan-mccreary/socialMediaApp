@@ -92,7 +92,42 @@ class App extends Component {
         })
     }
 
+    populateData = (id) => {
+        this.getFriendsPosts(id);
+        this.currentFriends(id);
+    }
+
+    handleClickLike = (event) => {
+        let id = event.target.id
+
+        this.putLike(id);
+    }
+
     //HTTP Requests
+
+    putLike = async (id) => {
+        await axios
+            .put(`http://localhost:5003/api/posts/like/${id}`)
+            .then((res) => {
+                let target = [...this.state.posts];
+                let index = target.findIndex((el) => res.data._id === el._id);
+                target[index] = res.data;
+                this.setState({
+                    posts: target
+                });
+            })
+    };
+
+    getFriendsPosts = async (id) => {
+        await axios
+            .get(`http://localhost:5003/api/posts/friends/${id}`)
+            .then((res) => {
+                this.setState({
+                    posts: res.data
+                });
+            })
+    };
+
     putImage = async (id) => {
         var form = new FormData();
         form.append('image', this.state.file);
@@ -130,7 +165,9 @@ class App extends Component {
                 this.setState({
                     currentUser: user
                 })
-                console.log(user);
+
+
+                this.populateData(user._id);
             })
     }
 
@@ -240,11 +277,15 @@ class App extends Component {
                                         handleSubmit={this.handleUploadImageSubmit}
                                         handleChange={this.handleSearchChange}
                                         allUsers={this.state.allUsers}
-                                        search={this.state.search}
-                                        friends={this.state.friends} />}
+                                        search={this.state.search} />}
                                 />
                                 <Route exact path="/create/*" element={<CreatePost />} />
-                                <Route exact path="/home/*" element={<Home friends={this.state.friends} />} />
+                                <Route exact path="/home/*"
+                                    element={<Home
+                                        handleClick={this.handleClickLike}
+                                        friends={this.state.friends}
+                                        posts={this.state.posts}
+                                    />} />
                                 <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} />
                                 <Route path='*' element={<ErrorPage />} />
                             </Routes>
@@ -254,8 +295,7 @@ class App extends Component {
                             <Routes>
                                 <Route exact path="/" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
                                 <Route exact path="/register" element={<Register handleChange={this.handleRegisterChange} info={this.state.registerInfo} handleSubmit={this.handleRegisterSubmit} />} />
-                                <Route exact path="*" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />
-                            </Routes>
+                                <Route exact path="*" element={<Login handleChange={this.handleLoginChange} info={this.state.loginInfo} handleSubmit={this.handleLoginSubmit} />} />                            </Routes>
                         </>}
                 </div>
             </BrowserRouter>

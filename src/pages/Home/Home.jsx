@@ -6,15 +6,16 @@ import {
     Routes,
 } from "react-router-dom"
 
+
 const Home = (props) => {
     return(
         <div>
 
             <Routes>
-            <Route exact path="/" element={<FriendsList friends={props.friends} />} />
+                <Route exact path="/" element={<FriendsList friends={props.friends} />} />
             </Routes>
             <Routes>
-            <Route exact path="/" element={<PostFeed />} />
+                <Route exact path="/" element={<PostFeed posts={props.posts} handleClick={props.handleClick}/>} />
             </Routes>
 
         </div>
