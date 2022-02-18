@@ -7,7 +7,7 @@ import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
 import Home from '../pages/Home/Home';
 import About from '../pages/About/About';
-import CreatePosts from './CreatePost/CreatePost';
+import CreatePost from './CreatePost/CreatePost';
 import jwtDecode from 'jwt-decode';
 import ErrorPage from '../components/ErrorPage/ErrorPage'
 import {
@@ -33,8 +33,12 @@ class App extends Component {
                 email: '',
                 password: ''
             },
-            currentUser: undefined,
             file: '',
+
+            allUsers: [],
+
+            search: "",
+            currentUser: undefined,
             friends: [],
             posts: [],
             newPost: ''
@@ -80,6 +84,12 @@ class App extends Component {
     handleLoginSubmit = (event) => {
         event.preventDefault();
         this.postLogin(this.state.loginInfo)
+    }
+
+    handleSearchChange = (event) => {
+        this.setState({
+            search: event.target.value
+        })
     }
 
     //HTTP Requests
@@ -135,7 +145,7 @@ class App extends Component {
                 this.setState({
                     newPost: ''
                 })
-                
+
             })
     }
 
@@ -143,7 +153,7 @@ class App extends Component {
         this.setState({
             newPost: event.target.value
         })
-        
+
     }
 
     handleNewPostSubmit = (event) => {
@@ -159,6 +169,15 @@ class App extends Component {
         })
     }
 
+    findAllUsers = async () => {
+        await axios
+            .get('http://localhost:5003/api/users')
+            .then((res) => {
+                this.setState({
+                    allUsers: res.data
+                })
+            });
+    }
 
     handleFriendsSubmit = (event) => {
         event.preventDefault();
@@ -166,7 +185,7 @@ class App extends Component {
     };
 
     currentFriends = async (id) => {
-   
+
         await axios
             .get(`http://localhost:5003/api/users`, id)
             .then((res) => {
@@ -176,7 +195,7 @@ class App extends Component {
     };
 
     Posts = async () => {
-   
+
         await axios
             .get(`http://localhost:5003/api/post`)
             .then((res) => {
@@ -186,6 +205,7 @@ class App extends Component {
 
     //Run on component initial mount
     componentDidMount() {
+        this.findAllUsers()
 
     };
 
@@ -213,8 +233,17 @@ class App extends Component {
                             </ul>
                         </nav>
                         <Routes>
-                            <Route exact path="/about/*" element={<About file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
-                            <Route exact path="/create/*" element={<CreatePosts handleChange={this.handleNewPostChange} info={this.state.newPost} handleSubmit={this.handleNewPostSubmit}/>} />
+                            <Route exact path="/about/*" 
+                            element={<About 
+                                file={this.state.file} 
+                                setFile={this.setFile} 
+                                id={this.state.currentUser._id} 
+                                handleSubmit={this.handleUploadImageSubmit} 
+                                handleChange={this.handleSearchChange} 
+                                allUsers={this.state.allUsers} 
+                                search={this.state.search}/> }
+                            />
+                            <Route exact path="/create/*" element={<CreatePost />} />
                             <Route exact path="/home/*" element={<Home />} />
                             <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
                             <Route path='*' element={<ErrorPage/>}/>                         
