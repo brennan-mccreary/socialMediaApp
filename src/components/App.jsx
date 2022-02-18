@@ -7,7 +7,7 @@ import Logout from "./Logout/Logout"
 import Register from "./Register/Register.jsx"
 import Home from '../pages/Home/Home';
 import About from '../pages/About/About';
-import NewPost from '../pages/NewPost/NewPost';
+import CreatePosts from './CreatePost/CreatePost';
 import jwtDecode from 'jwt-decode';
 import ErrorPage from '../components/ErrorPage/ErrorPage'
 import {
@@ -36,7 +36,8 @@ class App extends Component {
             currentUser: undefined,
             file: '',
             friends: [],
-            posts: []
+            posts: [],
+            newPost: ''
         }
     }
 
@@ -123,6 +124,34 @@ class App extends Component {
             })
     }
 
+    postMyPost = async () => {
+        await axios
+            .post('http://localhost:5003/api/posts/post', {
+                text: this.state.newPost,
+                ownedBy: this.state.currentUser._id
+            })
+
+            .then((res) => {
+                this.setState({
+                    newPost: ''
+                })
+                
+            })
+    }
+
+    handleNewPostChange = (event) => {
+        this.setState({
+            newPost: event.target.value
+        })
+        
+    }
+
+    handleNewPostSubmit = (event) => {
+        event.preventDefault();
+        this.postMyPost(this.state.newPost)
+    }
+
+
     handleLogout = async () => {
         localStorage.clear();
         this.setState({
@@ -185,7 +214,7 @@ class App extends Component {
                         </nav>
                         <Routes>
                             <Route exact path="/about/*" element={<About file={this.state.file} setFile={this.setFile} id={this.state.currentUser._id} handleSubmit={this.handleUploadImageSubmit} />} />
-                            <Route exact path="/create/*" element={<NewPost />} />
+                            <Route exact path="/create/*" element={<CreatePosts handleChange={this.handleNewPostChange} info={this.state.newPost} handleSubmit={this.handleNewPostSubmit}/>} />
                             <Route exact path="/home/*" element={<Home />} />
                             <Route exact path="/logout/*" element={<Logout handleLogout={this.handleLogout} />} /> 
                             <Route path='*' element={<ErrorPage/>}/>                         

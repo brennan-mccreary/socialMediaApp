@@ -4,11 +4,11 @@ import React from 'react';
 const CreateAboutMe = (props) => {
     return (
         <div className='top-level' id= 'Post' hidden={false}>
-            Add an AboutMe
+            Add a Bio Here: 
             <form className='AboutMe-box' onSubmit={props.submitAboutMe}>
                 <input type="text"  value={props.aboutMeText} onChange={props.changeAboutMe}/>
                 <div className='button'>
-                    <button>Post</button>
+                    <button>Save</button>
                 </div>
             </form>
         </div>
