@@ -3,13 +3,13 @@ import React from 'react';
 const MyPosts = (props) => {
     return (
         <div>
-            {!props.posts ?
+            {!props.myPosts ?
                 <div>
                     No posts to display...
                 </div>
                 :
                 <div>
-                    {props.posts.map((el, i) =>
+                    {props.myPosts.map((el, i) =>
                         <div className='card post-container' key={i}>
                             <div className="col">
                                 <div className="card" >

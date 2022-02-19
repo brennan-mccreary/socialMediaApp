@@ -24,7 +24,7 @@ const About = (props) => {
                 <Route exact path="/*" element={<CreateAboutMe />} />
             </Routes>
             <Routes>
-                <Route exact path="/*" element={<MyPosts />} />
+                <Route exact path="/*" element={<MyPosts myPosts={props.myPosts}/>} />
             </Routes>
             <Routes>
                 <Route path="/*" element={<UploadImage
