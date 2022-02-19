@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect} from 'react';
+import './UploadImage.css';
 
 const UploadImage = (props) => {
     const [previewUrl, setPreviewUrl] = useState();
@@ -34,7 +35,7 @@ const UploadImage = (props) => {
     }
 
     return ( 
-        <div className="form-control">
+        <div className="form-control upload-image-top">
             <form onSubmit = {props.handleSubmit} encType='multipart/form-data' >
                 <input
                     id='upload-image-form'

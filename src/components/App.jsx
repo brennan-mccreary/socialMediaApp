@@ -254,22 +254,27 @@ class App extends Component {
                 <div>
                     {this.state.currentUser !== undefined ?
                         <>
-                            <nav>
-                                <ul>
-                                    <li>
-                                        <Link to="/home">Home</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/about">About Me</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/create">Create Post</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/logout">Logout</Link>
-                                    </li>
-                                </ul>
+                            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                                <div className="container-fluid">
+                                    <div className="collapse navbar-collapse" id="navbarNav">
+                                    <ul className="navbar-nav ">
+                                        <li className="nav-item link-spacer">
+                                            <Link to="/home">Home</Link>
+                                        </li>
+                                        <li className="nav-item link-spacer">
+                                            <Link to="/about">About Me</Link>
+                                        </li>
+                                        <li className="nav-item link-spacer">
+                                            <Link to="/create">Create Post</Link>
+                                        </li>
+                                        <li className="nav-item link-spacer">
+                                            <Link to="/logout">Logout</Link>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                </div>
                             </nav>
+                            
                             <Routes>
                                 <Route exact path="/about/*"
                                     element={<About

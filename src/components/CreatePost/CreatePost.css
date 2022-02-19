@@ -2,3 +2,21 @@ body {
     background-image: url('../../Photos/MainBackground.jpg');
     background-color: #cccccc;
    }
+
+.text-input {
+    width: 50rem;
+    height: 14rem;
+    font-size: 15px;
+    resize: none;
+}
+
+.top-level {
+    padding-top: 15rem;
+    margin: auto;
+    text-align: center;
+    font-size: 40px;
+}
+
+.post-btn {
+    font-size: 25px;
+}
