@@ -41,7 +41,8 @@ class App extends Component {
             currentUser: undefined,
             friends: [],
             posts: [],
-            newPost: ''
+            newPost: '',
+            myPosts: []
         }
     }
 
@@ -95,6 +96,7 @@ class App extends Component {
     populateData = (id) => {
         this.getFriendsPosts(id);
         this.currentFriends(id);
+        this.getMyPosts(id);
     }
 
     handleClickLike = (event) => {
@@ -118,6 +120,16 @@ class App extends Component {
             })
     };
 
+    getMyPosts = async (id) => {
+        await axios
+            .get(`http://localhost:5003/api/posts/${id}`)
+            .then((res) => {
+                this.setState({
+                    myPosts: res.data
+                });
+            })
+    };
+
     getFriendsPosts = async (id) => {
         await axios
             .get(`http://localhost:5003/api/posts/friends/${id}`)
@@ -127,6 +139,12 @@ class App extends Component {
                 });
             })
     };
+
+
+
+
+
+
 
     putImage = async (id) => {
         var form = new FormData();
@@ -257,24 +275,24 @@ class App extends Component {
                             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                                 <div className="container-fluid">
                                     <div className="collapse navbar-collapse" id="navbarNav">
-                                    <ul className="navbar-nav ">
-                                        <li className="nav-item link-spacer">
-                                            <Link to="/home">Home</Link>
-                                        </li>
-                                        <li className="nav-item link-spacer">
-                                            <Link to="/about">About Me</Link>
-                                        </li>
-                                        <li className="nav-item link-spacer">
-                                            <Link to="/create">Create Post</Link>
-                                        </li>
-                                        <li className="nav-item link-spacer">
-                                            <Link to="/logout">Logout</Link>
-                                        </li>
-                                    </ul>
+                                        <ul className="navbar-nav ">
+                                            <li className="nav-item link-spacer">
+                                                <Link to="/home">Home</Link>
+                                            </li>
+                                            <li className="nav-item link-spacer">
+                                                <Link to="/about">About Me</Link>
+                                            </li>
+                                            <li className="nav-item link-spacer">
+                                                <Link to="/create">Create Post</Link>
+                                            </li>
+                                            <li className="nav-item link-spacer">
+                                                <Link to="/logout">Logout</Link>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </nav>
-                            
+
                             <Routes>
                                 <Route exact path="/about/*"
                                     element={<About
@@ -286,6 +304,7 @@ class App extends Component {
                                         handleSubmit={this.handleUploadImageSubmit}
                                         handleChange={this.handleSearchChange}
                                         allUsers={this.state.allUsers}
+                                        myPosts={this.state.myPosts}
                                         search={this.state.search} />}
                                 />
                                 <Route exact path="/create/*" element={<CreatePost />} />
