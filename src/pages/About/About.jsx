@@ -51,6 +51,7 @@ const About = (props) => {
                     </div>
                     {/* posts */}
                     <div className="col-md-5 col-lg-6">
+                        <h2 className="personal-posts-head">My Posts</h2>
                         <Routes>
                             <Route exact path="/*" element={<MyPosts myPosts={props.myPosts}/>} />
                         </Routes>

@@ -26,3 +26,10 @@ body {
 .bio-container {
     width: auto;
 }
+
+.personal-posts-head {
+    text-align: center;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+    font-size: 2.75rem;
+}

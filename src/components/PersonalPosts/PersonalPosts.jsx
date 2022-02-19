@@ -15,8 +15,8 @@ const MyPosts = (props) => {
                             <div className="col">
                                 <div className="card" >
                                     <div className="card-body">
-                                        <h3 className="card-title">My Post</h3>
                                         <p className="card-text">{el.text}</p>
+                                        <h6>Posted at: {el.postedOn}</h6>
                                     </div>
                                 </div>
                             </div>
