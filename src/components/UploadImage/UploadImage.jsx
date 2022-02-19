@@ -45,7 +45,7 @@ const UploadImage = (props) => {
                     onChange = {pickedHandler}
                 />
                 <div>
-                    <button type='submit'>Upload</button>
+                    <button type='submit' className='btn btn-success'>Upload</button>
                 </div>
             </form>
              

@@ -1,12 +1,12 @@
 import React from 'react';
-// import './AboutMe.css';
+import './CreateAboutMe.css';
 
 const CreateAboutMe = (props) => {
     return (
-        <div className='top-level' id= 'Post' hidden={false}>
-            Add a Bio Here: 
+        <div className='about-me-container' hidden={false}>
+            <h3>Add Bio:</h3> 
             <form className='' onSubmit={props.submitAboutMe}>
-                <input type="text"  value={props.aboutMeText} onChange={props.changeAboutMe}/>
+                <textarea className='text-input-bio' type="text"  value={props.aboutMeText} onChange={props.changeAboutMe}/>
                 <div>
                     <button type='submit' className='btn btn-success'>Save</button>
                 </div>

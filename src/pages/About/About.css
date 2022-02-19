@@ -2,3 +2,27 @@ body {
     background-image: url('../../Photos/MainBackground.jpg');
     background-color: #cccccc;
    }
+
+.about-container {
+    padding-top: 5rem;
+}
+
+.bio-text {
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.profile-info-container {
+    align-items: center;
+    text-align: center;
+}
+
+.friends-info-container {
+    align-items: center;
+    text-align: center;
+}
+
+.bio-container {
+    width: auto;
+}
