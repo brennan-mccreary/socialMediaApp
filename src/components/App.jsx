@@ -42,7 +42,8 @@ class App extends Component {
             friends: [],
             posts: [],
             newPost: '',
-            myPosts: []
+            myPosts: [],
+            incoming: []
         }
     }
 
@@ -97,6 +98,7 @@ class App extends Component {
         this.getFriendsPosts(id);
         this.currentFriends(id);
         this.getMyPosts(id);
+        this.getIncomingRequests(id);
     }
 
     handleClickLike = (event) => {
@@ -140,11 +142,16 @@ class App extends Component {
             })
     };
 
-
-
-
-
-
+    getIncomingRequests = async (id) => {
+        await axios
+            .get(`http://localhost:5003/api/users/friend-requests/${id}`)
+            .then((res) => {
+                this.setState({
+                    incoming: res.data
+                })
+                console.log(this.state.incoming);
+            });
+    }
 
     putImage = async (id) => {
         var form = new FormData();
@@ -263,7 +270,6 @@ class App extends Component {
     //Run on component initial mount
     componentDidMount() {
         this.findAllUsers()
-
     };
 
     //Render components
@@ -306,6 +312,7 @@ class App extends Component {
                                         handleChange={this.handleSearchChange}
                                         allUsers={this.state.allUsers}
                                         myPosts={this.state.myPosts}
+                                        incoming={this.state.incoming}
                                         search={this.state.search} />}
                                 />
                                 <Route exact path="/create/*" element={<CreatePost handleChange={this.handleNewPostChange} handleSubmit={this.handleNewPostSubmit} />} />

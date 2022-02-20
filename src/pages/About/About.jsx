@@ -74,7 +74,7 @@ const About = (props) => {
                         <div className="friends-info-container">
                             <Routes>
                                 <Route exact path="/" element={<FriendsList friends={props.friends} />} />
-                                <Route exact path="/incoming" element={<IncomingFriendRequests />} />
+                                <Route exact path="/incoming" element={<IncomingFriendRequests incoming={props.incoming} />} />
                                 <Route exact path="/find" element={<FindFriends handleChange={props.handleChange} allUsers={props.allUsers} search={props.search} />} />
                             </Routes>
                         </div>
