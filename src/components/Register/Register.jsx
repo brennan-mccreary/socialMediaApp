@@ -34,7 +34,7 @@ const Register = (props) => {
 
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon6">Password: </span>
-                    <input name='password' value={props.info.password} onChange={props.handleChange} type="text" className="form-control" aria-label="New Password" aria-describedby="basic-addon1" />
+                    <input name='password' value={props.info.password} onChange={props.handleChange} type="password" className="form-control" aria-label="New Password" aria-describedby="basic-addon1" />
                 </div>
                 <div>
                     <button type="submit" className="btn btn-primary">Create</button>

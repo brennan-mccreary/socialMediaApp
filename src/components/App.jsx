@@ -36,6 +36,7 @@ class App extends Component {
             file: '',
 
             allUsers: [],
+            biography: '',
 
             search: "",
             currentUser: undefined,
@@ -51,7 +52,14 @@ class App extends Component {
         this.setState({
             file: file
         });
-    }
+    };
+
+    handleAnyChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    };
+
 
     handleUploadImageSubmit = (event) => {
         event.preventDefault();
@@ -99,16 +107,32 @@ class App extends Component {
         this.currentFriends(id);
         this.getMyPosts(id);
         this.getIncomingRequests(id);
-    }
+    };
 
     handleClickLike = (event) => {
         let id = event.target.id
 
         this.putLike(id);
-    }
+    };
+
+    handleSubmitAboutMe = (event) => {
+        event.preventDefault();
+        this.putAboutMe(this.state.currentUser._id, {biography: this.state.biography});
+    };
+
 
     //HTTP Requests
-
+    putAboutMe = async (id, biography) => {
+        await axios
+            .put(`http://localhost:5003/api/users/about/${id}`, biography)
+            .then((res) => {
+                this.setState({
+                    currentUser: res.data
+                })
+                console.log(res.data)
+            });
+    };
+    
     putLike = async (id) => {
         await axios
             .put(`http://localhost:5003/api/posts/like/${id}`)
@@ -149,7 +173,6 @@ class App extends Component {
                 this.setState({
                     incoming: res.data
                 })
-                console.log(this.state.incoming);
             });
     }
 
@@ -202,12 +225,10 @@ class App extends Component {
                 text: this.state.newPost,
                 ownedBy: this.state.currentUser._id
             })
-
             .then((res) => {
-                this.state.myPosts += this.state.newPost;
-                this.setState({
-                    newPost: ''
-                })
+                this.setState(prevState => {
+                    return { myPosts: [res.data, ...prevState.myPosts] }
+                });
 
             })
     }
@@ -228,7 +249,14 @@ class App extends Component {
     handleLogout = async () => {
         localStorage.clear();
         this.setState({
-            currentUser: undefined
+            currentUser: undefined,
+            file: '',
+            search: "",
+            friends: [],
+            posts: [],
+            newPost: '',
+            myPosts: [],
+            incoming: [],
         })
     }
 
@@ -308,16 +336,20 @@ class App extends Component {
                                         friends={this.state.friends}
                                         setFile={this.setFile}
                                         id={this.state.currentUser._id}
+                                        submitAboutMe={this.handleSubmitAboutMe}
                                         handleSubmit={this.handleUploadImageSubmit}
-                                        handleChange={this.handleSearchChange}
+                                        handleSearchChange={this.handleSearchChange}
                                         allUsers={this.state.allUsers}
                                         myPosts={this.state.myPosts}
                                         incoming={this.state.incoming}
+                                        handleAnyChange={this.handleAnyChange}
                                         search={this.state.search} />}
                                 />
                                 <Route exact path="/create/*" element={<CreatePost handleChange={this.handleNewPostChange} handleSubmit={this.handleNewPostSubmit} />} />
                                 <Route exact path="/home/*"
                                     element={<Home
+                                        user={this.state.currentUser}
+
                                         handleClick={this.handleClickLike}
                                         friends={this.state.friends}
                                         posts={this.state.posts}

@@ -27,7 +27,8 @@ const About = (props) => {
                             <img src={(image)} alt='profile' height={300} width={300} ></img>
                             :
                             <img src={placeholder} alt='placeholder profile' height={300} width={300}></img>}
-
+                        
+                        <h2 className="personal-posts-head">Biograpghy</h2>
                         {props.user.biography ?
                             <p className='bio-text'>{props.user.biography}</p>
                             :
@@ -45,7 +46,7 @@ const About = (props) => {
 
                         <div className="bio-container">
                             <Routes>
-                                <Route exact path="/*" element={<CreateAboutMe />} />
+                                <Route exact path="/*" element={<CreateAboutMe submitAboutMe={props.submitAboutMe} handleChange={props.handleAnyChange}/>} />
                             </Routes>
                         </div>
                     </div>
@@ -75,7 +76,7 @@ const About = (props) => {
                             <Routes>
                                 <Route exact path="/" element={<FriendsList friends={props.friends} />} />
                                 <Route exact path="/incoming" element={<IncomingFriendRequests incoming={props.incoming} />} />
-                                <Route exact path="/find" element={<FindFriends handleChange={props.handleChange} allUsers={props.allUsers} search={props.search} />} />
+                                <Route exact path="/find" element={<FindFriends handleChange={props.handleSearchChange} allUsers={props.allUsers} search={props.search} />} />
                             </Routes>
                         </div>
 

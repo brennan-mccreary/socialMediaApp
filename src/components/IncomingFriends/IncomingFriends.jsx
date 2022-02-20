@@ -11,7 +11,7 @@ const IncomingFriendRequests = (props) => {
                     <div key={el}>
                         {el.firstName} {el.lastName}
                     </div>)
-                    : <div>Search for Friends</div>}
+                    : <div>No new requests...</div>}
             </div>
         </div>
     );

@@ -3,4 +3,6 @@ body {
     background-color: #cccccc;
    }
 
-   
+.head-container {
+    padding-top: 5rem;
+}
