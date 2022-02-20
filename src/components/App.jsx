@@ -197,6 +197,7 @@ class App extends Component {
             })
 
             .then((res) => {
+                this.state.myPosts += this.state.newPost;
                 this.setState({
                     newPost: ''
                 })
@@ -307,7 +308,7 @@ class App extends Component {
                                         myPosts={this.state.myPosts}
                                         search={this.state.search} />}
                                 />
-                                <Route exact path="/create/*" element={<CreatePost />} />
+                                <Route exact path="/create/*" element={<CreatePost handleChange={this.handleNewPostChange} handleSubmit={this.handleNewPostSubmit} />} />
                                 <Route exact path="/home/*"
                                     element={<Home
                                         handleClick={this.handleClickLike}

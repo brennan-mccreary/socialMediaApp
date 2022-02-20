@@ -21,18 +21,18 @@ const About = (props) => {
             <div className="container">
                 <div className="row">
                     {/* profile picture, display bio*/}
-                    <div className="col-md-5 col-lg-3 profile-info-container"> 
+                    <div className="col-md-5 col-lg-3 profile-info-container">
                         <h3>{props.user.firstName + ' ' + props.user.lastName}</h3>
                         {props.user.image ?
-                        <img src={(image)} alt='profile' height={300} width={300} ></img>
-                        :
-                        <img src={placeholder} alt='placeholder profile' height={300} width={300}></img>}
+                            <img src={(image)} alt='profile' height={300} width={300} ></img>
+                            :
+                            <img src={placeholder} alt='placeholder profile' height={300} width={300}></img>}
 
                         {props.user.biography ?
-                        <p className='bio-text'>{props.user.biography}</p>
-                        :
-                        null}
-                        
+                            <p className='bio-text'>{props.user.biography}</p>
+                            :
+                            null}
+
 
                         <Routes>
                             <Route path="/*" element={<UploadImage
@@ -53,7 +53,7 @@ const About = (props) => {
                     <div className="col-md-5 col-lg-6">
                         <h2 className="personal-posts-head">My Posts</h2>
                         <Routes>
-                            <Route exact path="/*" element={<MyPosts myPosts={props.myPosts}/>} />
+                            <Route exact path="/*" element={<MyPosts myPosts={props.myPosts} />} />
                         </Routes>
                     </div>
                     {/* friends */}
@@ -78,14 +78,14 @@ const About = (props) => {
                                 <Route exact path="/find" element={<FindFriends handleChange={props.handleChange} allUsers={props.allUsers} search={props.search} />} />
                             </Routes>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
             {/* End-Profile info container- */}
-            
-            
-        
+
+
+
         </div>
     )
 }
