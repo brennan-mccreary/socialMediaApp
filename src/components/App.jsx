@@ -120,8 +120,21 @@ class App extends Component {
         this.putAboutMe(this.state.currentUser._id, {biography: this.state.biography});
     };
 
+    handleClickAddFriend = (event) => {
+        event.preventDefault();
+        this.putOutgoingFriendRequest(this.state.currentUser._id, event.target.id);
+    };
+
 
     //HTTP Requests
+    putOutgoingFriendRequest = async (from, to) => {
+        await axios
+            .put(`http://localhost:5003/api/users/add-friend/${from}/${to}`)
+            .then((res) => {
+                alert(`Friend request sent to ${res.data.firstName}`)
+            })
+    };
+
     putAboutMe = async (id, biography) => {
         await axios
             .put(`http://localhost:5003/api/users/about/${id}`, biography)
@@ -332,6 +345,7 @@ class App extends Component {
                                 <Route exact path="/about/*"
                                     element={<About
                                         user={this.state.currentUser}
+                                        handleClickAddFriend={this.handleClickAddFriend}
                                         file={this.state.file}
                                         friends={this.state.friends}
                                         setFile={this.setFile}

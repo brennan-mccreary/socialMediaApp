@@ -1,0 +1,12 @@
+.add-friend-button {
+    padding-left: 1rem;
+    margin-left: 1rem;
+}
+
+.add-friend-list {
+    text-align: left;
+}
+
+.add-friend-search {
+    width: 15vw
+}
