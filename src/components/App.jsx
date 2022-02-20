@@ -125,8 +125,35 @@ class App extends Component {
         this.putOutgoingFriendRequest(this.state.currentUser._id, event.target.id);
     };
 
+    handleClickAcceptFriend = (event) => { 
+        event.preventDefault();
+        this.putAcceptFriend(this.state.currentUser._id, event.target.id);
+    };
+
+    handleClickDeclineFriend = (event) => {
+        event.preventDefault();
+        this.putDeclineFriend(this.state.currentUser._id, event.target.id);
+    };
 
     //HTTP Requests
+    putAcceptFriend = async (idOne, idTwo) => {
+        await axios
+            .put(`http://localhost:5003/api/users/${idOne}/accept-friend/${idTwo}`)
+            .then((res) => {
+                console.log(res.data);
+                this.populateData(idOne);
+            });
+    };
+
+    putDeclineFriend = async (idOne, idTwo) => {
+        await axios
+            .put(`http://localhost:5003/api/users/${idOne}/decline-friend/${idTwo}`)
+            .then((res) => {
+                console.log(res.data);
+                this.populateData(idOne);
+            });
+    };
+
     putOutgoingFriendRequest = async (from, to) => {
         await axios
             .put(`http://localhost:5003/api/users/add-friend/${from}/${to}`)
@@ -346,6 +373,8 @@ class App extends Component {
                                     element={<About
                                         user={this.state.currentUser}
                                         handleClickAddFriend={this.handleClickAddFriend}
+                                        handleClickAcceptFriend={this.handleClickAcceptFriend}
+                                        handleClickDeclineFriend={this.handleClickDeclineFriend}
                                         file={this.state.file}
                                         friends={this.state.friends}
                                         setFile={this.setFile}

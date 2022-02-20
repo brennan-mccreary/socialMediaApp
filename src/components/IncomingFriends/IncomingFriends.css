@@ -1,0 +1,10 @@
+.friend-request-container {
+    outline: 2px solid black;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.friend-request-list {
+    font-size: 1.5rem;
+    text-align: center;
+}
