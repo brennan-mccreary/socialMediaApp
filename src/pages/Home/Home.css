@@ -1,8 +1,8 @@
 body {
-    background-image: url('../../Photos/MainBackground.jpg');
-    background-color: #cccccc;
-   }
+  background-image: url("../../Photos/MainBackground.jpg");
+  background-color: #cccccc;
+}
 
 .head-container {
-    padding-top: 5rem;
+  padding-top: 5rem;
 }
