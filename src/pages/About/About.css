@@ -1,6 +1,8 @@
 body {
     background-image: url('../../Photos/MainBackground.jpg');
     background-color: #cccccc;
+    background-size: cover;
+
    }
 
 .about-container {
@@ -32,4 +34,8 @@ body {
     text-decoration: underline;
     padding-bottom: 1rem;
     font-size: 2.75rem;
+}
+
+.head-container {
+    padding-top: 5rem;
 }

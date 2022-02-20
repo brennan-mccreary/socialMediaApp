@@ -5,11 +5,18 @@ const PostFeed = (props) => {
 
     return (
         <div>
-            {props.posts.length === 0 ? 
-                <div>
+            {/* {props.posts.length === 0 ?  */}
+            <div>
+                <h2 className="personal-posts-head">
+                    My Friends' Posts
+                </h2>
+            </div>
+            <div>
+                {props.posts.length === 0 ? 
+                <h4>
                     No posts to display...
-                </div>
-                :
+                </h4>
+            :
                 <div>
                     {props.posts.map((el, i) => 
                         <div className='card post-container' key={i}>
@@ -20,17 +27,17 @@ const PostFeed = (props) => {
                                         <p className="card-text">{el.text}</p>
                                         <h6>Posted at: {el.postedOn}</h6>
                                     </div>
-                                    <div>
+                                    <div className="lefty">
                                         <button className='btn btn-success' onClick={props.handleClick} id={el._id}>Like</button>
-                                        <h6>Likes: {el.likeCount}</h6>
+                                        <h6>Likes: {el.likeCount} </h6>
                                     </div>
                                     
                                 </div>
                             </div>
                         </div>
                     )}
-                </div>
-            }
+                </div>}
+            </div>
         </div>
     )
 }

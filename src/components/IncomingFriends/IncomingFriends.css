@@ -2,9 +2,18 @@
     outline: 2px solid black;
     padding-bottom: 1rem;
     margin-top: 1rem;
+    text-align: left;
+    text-decoration: underline;
+
 }
 
 .friend-request-list {
     font-size: 1.5rem;
-    text-align: center;
+    text-align: left;
+}
+
+.friend-request {
+    text-align: left;
+    text-decoration: underline;
+
 }

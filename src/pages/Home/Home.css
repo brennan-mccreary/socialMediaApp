@@ -1,7 +1,8 @@
 body {
     background-image: url('../../Photos/MainBackground.jpg');
     background-color: #cccccc;
-   }
+    background-size: cover;
+}
 
 .head-container {
     padding-top: 5rem;

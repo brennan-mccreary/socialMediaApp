@@ -2,3 +2,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+
+ 
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+
+  }

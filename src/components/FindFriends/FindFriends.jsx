@@ -4,8 +4,8 @@ import './FindFriends.css';
 const FindFriends = (props) => {
     return (
         <div>
-            <div>
-                <h2>Find Friends</h2>
+            <div className="find-friends-head">
+                <h2 >Find Friends:</h2>
             </div>
             <nav className="navbar navbar-light">
                 <div className="container-fluid">

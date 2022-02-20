@@ -28,13 +28,6 @@ const About = (props) => {
                             :
                             <img src={placeholder} alt='placeholder profile' height={300} width={300}></img>}
                         
-                        <h2 className="personal-posts-head">Biograpghy</h2>
-                        {props.user.biography ?
-                            <p className='bio-text'>{props.user.biography}</p>
-                            :
-                            null}
-
-
                         <Routes>
                             <Route path="/*" element={<UploadImage
                                 file={props.file}
@@ -43,6 +36,13 @@ const About = (props) => {
                                 handleSubmit={props.handleSubmit} />}
                             />
                         </Routes>
+                        <h2 className="personal-posts-head">Biography</h2>
+                        {props.user.biography ?
+                            <p className='bio-text'>{props.user.biography}</p>
+                            :
+                            null}
+
+
 
                         <div className="bio-container">
                             <Routes>
