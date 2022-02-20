@@ -8,7 +8,6 @@ const CreatePosts = (props) => {
         event.preventDefault()
         props.handleSubmit(event);
         navigate("/about")
-
     }
 
     return (
@@ -17,7 +16,7 @@ const CreatePosts = (props) => {
             <form className="post-box" onSubmit={viewMyPosts} >
                 <textarea className='text-input' type="text" value={props.newPost} onChange={props.handleChange} />
                 <div className="button">
-                    <button type="submit" className='post-btn btn btn-success' >Creat Post</button>
+                    <button type="submit" className='post-btn btn btn-success' >Create Post</button>
                 </div>
             </form>
         </div>
