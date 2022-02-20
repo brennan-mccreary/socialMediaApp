@@ -1,12 +1,7 @@
 body {
-<<<<<<< HEAD
   background-image: url("../../Photos/MainBackground.jpg");
   background-color: #cccccc;
-=======
-    background-image: url('../../Photos/MainBackground.jpg');
-    background-color: #cccccc;
-    background-size: cover;
->>>>>>> d8356f717169fecc0626fc4f2bbab69581efbed8
+  background-size: cover;
 }
 
 .head-container {
