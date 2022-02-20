@@ -39,7 +39,7 @@ const Home = (props) => {
                                 null}
                     </div>
                     <div className="col-xs-8 col-md-6 ">
-                        <h2 className="personal-posts-head">Friends' Posts</h2>
+                        {/* <h2 className="personal-posts-head">Friends' Posts</h2> */}
                         <Routes>
                             <Route exact path="/" element={<PostFeed posts={props.posts} handleClick={props.handleClick}/>} />
                         </Routes>

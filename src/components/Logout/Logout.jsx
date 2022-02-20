@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Logout.css'
 
 const Logout = (props) => {
     let navigate = useNavigate()
@@ -10,9 +11,9 @@ const Logout = (props) => {
 
     }
     return (
-        <div>
+        <div className="body">
             <form className='logout' onClick={loggingOut}>
-                <div>
+                <div className="lefty">
                     <button type="logout" className="btn btn-primary">Logout</button>
                 </div>
             </form>

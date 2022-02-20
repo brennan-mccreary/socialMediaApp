@@ -1,7 +1,15 @@
 body {
+<<<<<<< HEAD
   background-image: url("../../Photos/MainBackground.jpg");
   background-color: #cccccc;
 }
+=======
+    background-image: url('../../Photos/MainBackground.jpg');
+    background-color: #cccccc;
+    background-size: cover;
+
+   }
+>>>>>>> d8356f717169fecc0626fc4f2bbab69581efbed8
 
 .about-container {
   padding-top: 5rem;
@@ -28,6 +36,7 @@ body {
 }
 
 .personal-posts-head {
+<<<<<<< HEAD
   text-align: center;
   text-decoration: underline;
   padding-bottom: 1rem;
@@ -37,3 +46,14 @@ body {
 .head-container {
   padding-top: 1rem;
 }
+=======
+    text-align: center;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+    font-size: 2.75rem;
+}
+
+.head-container {
+    padding-top: 5rem;
+}
+>>>>>>> d8356f717169fecc0626fc4f2bbab69581efbed8

@@ -1,3 +1,15 @@
 .post-container {
     outline: 1px solid black;
 }
+
+
+.personal-posts-head {
+    text-decoration: underline;
+}
+
+
+
+.lefty {
+    padding-left: 3rem;
+
+}

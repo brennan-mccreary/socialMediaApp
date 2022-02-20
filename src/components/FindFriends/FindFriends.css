@@ -1,3 +1,10 @@
+.find-friends-head {
+    font-size: 2.75rem;
+    text-decoration: underline;
+    text-align: left;
+
+}
+
 .add-friend-button {
     padding-left: 1rem;
     margin-left: 1rem;
@@ -10,3 +17,5 @@
 .add-friend-search {
     width: 15vw
 }
+
+

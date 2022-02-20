@@ -2,6 +2,8 @@
   outline: 2px solid black;
   padding-bottom: 1rem;
   margin-top: 1rem;
+  text-align: left;
+  text-decoration: underline;
 }
 
 .friend-request-list {

@@ -36,6 +36,7 @@ const UploadImage = (props) => {
 
     return ( 
         <div className="form-control upload-image-top">
+            <div>Choose Your Profile Image:</div>
             <form onSubmit = {props.handleSubmit} encType='multipart/form-data' >
                 <input
                     id='upload-image-form'

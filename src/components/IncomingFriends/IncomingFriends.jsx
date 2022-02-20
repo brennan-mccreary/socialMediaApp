@@ -4,8 +4,8 @@ import './IncomingFriends.css';
 const IncomingFriendRequests = (props) => {
     return (
         <div>
-            <div className='friend-request'>
-                <h2>Friend Requests</h2>
+            <div className="friend-request">
+                <h2>Friend Requests:</h2>
             </div>
             <div>
                 {(props.incoming.length > 0) ? props.incoming.map((el, i) =>
@@ -22,7 +22,7 @@ const IncomingFriendRequests = (props) => {
                             </div>
                         </div>
                     </div>)
-                    : <div>No new requests...</div>}
+                    : <div className='friend-request-list'>No new requests...</div>}
             </div>
         </div>
     );
