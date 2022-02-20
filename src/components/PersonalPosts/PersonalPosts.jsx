@@ -1,30 +1,24 @@
-import React from "react";
-import './PostFeed.css';
+import React from 'react';
+import './PersonalPosts.css';
 
-const PostFeed = (props) => {
-
+const MyPosts = (props) => {
+    
     return (
         <div>
-            {!props.posts ? 
+            {!props.myPosts ?
                 <div>
                     No posts to display...
                 </div>
                 :
                 <div>
-                    {props.posts.map((el, i) => 
+                    {props.myPosts.map((el, i) =>
                         <div className='card post-container' key={i}>
                             <div className="col">
                                 <div className="card" >
                                     <div className="card-body">
-                                        <h3 className="card-title">Friend's Post</h3>
                                         <p className="card-text">{el.text}</p>
-                                        <h6>{el.ownedBy}</h6>
+                                        <h6>Posted at: {el.postedOn}</h6>
                                     </div>
-                                    <span>
-                                        <button onClick={props.handleClick} id={el._id}>Like</button>
-                                        <a>Likes: {el.likeCount}</a>
-                                    </span>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -35,4 +29,4 @@ const PostFeed = (props) => {
     )
 }
 
-export default PostFeed;
+export default MyPosts;
